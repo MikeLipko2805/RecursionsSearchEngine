@@ -12,6 +12,7 @@ import javax.swing.JFileChooser;
 /**
  *
  * @author Mike
+ * updated in student lounge with frank davis
  */
 public class SearchGUITest extends javax.swing.JFrame {
 
