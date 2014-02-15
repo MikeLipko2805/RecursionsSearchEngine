@@ -9,10 +9,21 @@ package my.searchGUItest;
 import java.io.File;
 import javax.swing.JFileChooser;
 
-/**
+/** This application allows a user to perform searches on a set of text
+ * files based on a user specified parameter (AND, OR, exact phrase).  Also
+ * provided are maintenance functions that allow a user to add or remove a 
+ * file from the set of indexed files and to rebuild the index.
+ * 
+ * This application uses two files.  The first file is the list of files
+ * included in the index.  The second file is the index itself.  
+ * The file format for both files is plain text, UTF-8 character
+ * encoding, comma delimited, one record per line, end of line marker is a
+ * carriage return.
  *
- * @author Mike
- * updated in student lounge with frank davis
+ * @author Mike Lipkowitz
+ * @author Frank Davis
+ * 
+ * @version 1.0
  */
 public class SearchGUITest extends javax.swing.JFrame {
 
@@ -114,6 +125,11 @@ public class SearchGUITest extends javax.swing.JFrame {
         searchButton.setText("Search");
         searchButton.setToolTipText("Searches the index and creates a list of files that match the search terms entered");
         searchButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Enter Search Terms:");
@@ -171,9 +187,19 @@ public class SearchGUITest extends javax.swing.JFrame {
 
         deleteFileButton.setText("Delete File");
         deleteFileButton.setToolTipText("Removes a file from the set of indexed files and rebuilds the index");
+        deleteFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteFileButtonActionPerformed(evt);
+            }
+        });
 
         rebuildIndexButton.setText("Rebuild Index");
         rebuildIndexButton.setToolTipText("Updates the index when files have been modified");
+        rebuildIndexButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rebuildIndexButtonActionPerformed(evt);
+            }
+        });
 
         fileList.setColumns(20);
         fileList.setRows(5);
@@ -280,8 +306,21 @@ public class SearchGUITest extends javax.swing.JFrame {
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitButtonActionPerformed
-
+/**This method allows a user to add a file to the set of indexed files
+ * 
+ * @param evt 
+ * @param filename - full pathname of file to be added
+ */
     private void addFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFileButtonActionPerformed
+        
+        // Read FileList 
+        // Open JFileChooser Dialog to select file to add
+        // Check if file is already included in FileList by comparing
+        // the pathname returned by JFileChooser to filename in FileList
+        // If compare method shows a match, show message box to user
+        // If not on FileList generate file number and append file number,
+        // filename (full path), and timestamp to FileList
+        // Call buildIndex method to recreate the IndexFile
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.showOpenDialog(null);
         File f = fileChooser.getSelectedFile();
@@ -289,6 +328,59 @@ public class SearchGUITest extends javax.swing.JFrame {
         fileList.setText(filename);
     }//GEN-LAST:event_addFileButtonActionPerformed
 
+    private void deleteFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteFileButtonActionPerformed
+        // Read FileList
+        // Display FileList to user so the file can be selected
+        // Show message dialog to get user confirmation that the file should
+        // be removed from list of indexed files
+        // If user confirms then remove file from FileList
+        // Call buildIndex method to recreate the IndexFile
+    }//GEN-LAST:event_deleteFileButtonActionPerformed
+
+    private void rebuildIndexButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rebuildIndexButtonActionPerformed
+        // Read FileList into an array or collection
+        // Create an array or collection to store the list of words contained
+        //  in each document
+        // Read each file in the FileList, parse the text to retrieve each
+        //  word and determine if it's an existing word in the word list or
+        //  if it's a new word
+        // If a new word, create a new word list record
+        // If not a new word, append the file number and position to the
+        //   existing word list record
+    }//GEN-LAST:event_rebuildIndexButtonActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // This method takes search type as a parameter (whichever
+        //  radio button was selected by user) and the search string
+        //  entered by the user and calls appropriate method
+        // Perform validation of user input
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void andSearch (String inputText){
+        // Called from searchButtonActionPerformed
+        // Returns all file names where all of the search terms were found
+    }
+    
+    private void orSearch (String inputText){
+        // Called from searchButtonActionPerformed
+        // Returns all file names where at least one of the search terms
+        //  was found
+        // Read IndexFile and compare inputText to existing word list from
+        //  IndexFile
+        // If there is a match then read the IndexFile record associated
+        //  with the word and retrieve the file number(s)
+        // If the inputText contains multiple words then run loop again that
+        //  reads IndexFile and compares next word in inputText to existing
+        //  word list from IndexFile
+        // Read the FileList and determine file name based on file number
+        //  retrieved
+    }
+    
+    private void phraseSearch (String inputText){
+        // Called from searchButtonActionPerformed
+        // Returns all file names where all of the search terms were found
+        //  in order
+    }
     /**
      * @param args the command line arguments
      */

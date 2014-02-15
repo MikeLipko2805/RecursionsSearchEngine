@@ -256,6 +256,9 @@
             <Property name="toolTipText" type="java.lang.String" value="Searches the index and creates a list of files that match the search terms entered"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
@@ -326,12 +329,18 @@
             <Property name="text" type="java.lang.String" value="Delete File"/>
             <Property name="toolTipText" type="java.lang.String" value="Removes a file from the set of indexed files and rebuilds the index"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteFileButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="rebuildIndexButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Rebuild Index"/>
             <Property name="toolTipText" type="java.lang.String" value="Updates the index when files have been modified"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rebuildIndexButtonActionPerformed"/>
+          </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
